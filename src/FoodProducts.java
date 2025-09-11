@@ -23,11 +23,11 @@ public class FoodProducts {
     }
 
     public void printSelection(){
-        System.out.println("1. Visa varor och handla");
-        System.out.println("2. Visa varukorg");
-        System.out.println("3. Visa lagersaldo");
-        System.out.println("4. Betala");
-        System.out.println("5. Avsluta");
+        System.out.println("\u001B[34m1. Visa varor och handla\u001B[0m");
+        System.out.println("\u001B[34m2. Visa varukorg\u001B[0m");
+        System.out.println("\u001B[34m3. Visa lagersaldo\u001B[0m");
+        System.out.println("\u001B[34m4. Betala\u001B[0m");
+        System.out.println("\u001B[34m5. Avsluta\u001B[0m");
     }
 
     public void inStockCheck(int numberOfItemsPurchased, int selectedItem){
@@ -90,7 +90,7 @@ public class FoodProducts {
             }
         }
         System.out.println("");
-        System.out.println("\u001B[32mTotalt pris: " + sum + " kr\u001B[0m");
+        System.out.println("\u001B[32m Totalt pris: " + sum + " kr\u001B[0m");
         System.out.println("");
         System.out.println("Tack för att ni använde DinMatbutik Inc.");
     }
@@ -107,7 +107,7 @@ public class FoodProducts {
     }
 
     public void printInvalidInput (){
-        System.out.println("\u001B[31mOgiltigt val\u001B[0m");
+        System.out.println("\u001B[31m Ogiltigt val\u001B[0m");
         System.out.println("");
     }
 }
