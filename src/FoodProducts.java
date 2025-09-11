@@ -1,10 +1,10 @@
 import java.util.ArrayList; // Import the ArrayList class
 public class FoodProducts {
 
-    FoodProduct product1 = new FoodProduct("Mjölk", 10, 5, 0);
-    FoodProduct product2 = new FoodProduct("Bröd", 20, 5, 0);
+    FoodProduct product1 = new FoodProduct("Mjölk", 10, 13, 0);
+    FoodProduct product2 = new FoodProduct("Bröd", 20, 2, 0);
     FoodProduct product3 = new FoodProduct("Ägg",25, 5, 0);
-    FoodProduct product4 = new FoodProduct("Smör", 40, 5, 0);
+    FoodProduct product4 = new FoodProduct("Smör", 40, 7, 0);
     ArrayList<FoodProduct> productCatalogue = new ArrayList<>();
 
     public FoodProducts (){
@@ -25,8 +25,26 @@ public class FoodProducts {
     public void printSelection(){
         System.out.println("1. Visa varor och handla");
         System.out.println("2. Visa varukorg");
-        System.out.println("3. Betala");
-        System.out.println("4. Avsluta");
+        System.out.println("3. Visa lagersaldo");
+        System.out.println("4. Betala");
+        System.out.println("5. Avsluta");
+    }
+
+    public void inStockCheck(int numberOfItemsPurchased, int selectedItem){
+        boolean loopCheck = true;
+        selectedItem -= 1;
+        while (loopCheck){
+            if ((productCatalogue.get(selectedItem).stock + productCatalogue.get(selectedItem).inCart) >= (numberOfItemsPurchased)){
+                productCatalogue.get(selectedItem).stock -= numberOfItemsPurchased;
+                loopCheck = false;
+            }
+            else {
+                System.out.println("\u001B[31m Out of stock \u001B[0m");
+                System.out.println("Including the items in your cart we have " + (productCatalogue.get(selectedItem).stock + productCatalogue.get(selectedItem).inCart) + " items in stock");
+                System.out.println("Hur många vill ni köpa totalt?");
+                numberOfItemsPurchased = SelectionHandling.positiveInt();
+            }
+        }
     }
 
     public void printStoreItemsAndPrice(){
@@ -42,6 +60,20 @@ public class FoodProducts {
         }
         System.out.println("");
         System.out.println("0. För att gå tillbaka");
+    }
+
+    public void printStoreStock(){
+        String format4_2 = "%-10s%s%n";
+        int i = 1;
+        for (FoodProduct product : productCatalogue) {
+            System.out.printf(
+                    format4_2,
+                    i + ". " + product.name + ": ",
+                    product.stock + " st"
+            );
+            i++;
+        }
+        System.out.println("");
     }
 
     public void printReceipt() {

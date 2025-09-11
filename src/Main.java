@@ -8,22 +8,23 @@ System.out.println("\u001B[34mThis is blue text\u001B[0m");
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         FoodProducts foodProducts = new FoodProducts();
-        SelectionHandling selection = new SelectionHandling();
+ //       SelectionHandling selection = new SelectionHandling();
 
         while (true) {
             foodProducts.printSelection();
-            int currentSelection = selection.positiveInt();
+            int currentSelection = SelectionHandling.positiveInt();
             switch (currentSelection) {
                 case 1:
                     boolean loopCheck = true;
                     while (loopCheck) {
                         foodProducts.printStoreItemsAndPrice();
-                        currentSelection = selection.positiveInt();
+                        currentSelection = SelectionHandling.positiveInt();
                         if (currentSelection <= foodProducts.productCatalogue.size() && currentSelection != 0) {
                             System.out.println("Hur många vill ni köpa totalt?");
-                            foodProducts.productCatalogue.get(currentSelection-1).inCart = selection.positiveInt();
+                            int amount = SelectionHandling.positiveInt();
+                            foodProducts.inStockCheck(amount, currentSelection);
+                            foodProducts.productCatalogue.get(currentSelection-1).inCart = amount;
                         }
                         else if (currentSelection == 0){
                             loopCheck = false;
@@ -38,10 +39,13 @@ public class Main {
                     System.out.println("");
                     break;
                 case 3:
+                    foodProducts.printStoreStock();
+                    break;
+                case 4:
                     //System.out.println();
                     foodProducts.printReceipt();
                     return;
-                case 4:
+                case 5:
                     System.out.println("Tack för att ni använde DinMatbutik Inc.");
                     return;
                 default:
